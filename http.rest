@@ -1,0 +1,21 @@
+# For testing routes with VSCode REST Client Extension
+
+POST http://localhost:4000/entries/create
+Content-Type: application/json
+
+{
+    "name": "test",
+    "date": "2022-01-20"
+}
+
+###
+
+DELETE http://localhost:4000/entries/4
+
+###
+
+PUT http://localhost:4000/entries/6
+
+###
+
+GET http://localhost:4000/entries/list

@@ -1,14 +1,12 @@
-const http = require('http')
+import express from 'express'
+import entriesRouter from './routes/entries.js'
 
-const server = http.createServer((req, res) => {
-    res.writeHead(200, {
-        'Content-Type': 'plain/text', // application/json
-        'Access-Control-Allow-Origin': '*',
-    })
-    res.write('Hello world!')
-    res.end()
-})
+const app = express()
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
 
-server.listen(4000, () => {
+app.use('/entries', entriesRouter)
+
+app.listen(4000, () => {
     console.log('Backend Server started!')
 })

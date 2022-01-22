@@ -1,0 +1,24 @@
+{
+  "name": "moodee",
+  "version": "0.1.0",
+  "description": "Mood / activity tracker web app",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sadamczyk/moodee.git"
+  },
+  "author": "sadamczyk",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sadamczyk/moodee/issues"
+  },
+  "homepage": "https://github.com/sadamczyk/moodee#readme",
+  "dependencies": {
+    "express": "^4.17.2"
+  }
+}
