@@ -4,17 +4,28 @@ POST http://localhost:4000/entries/create
 Content-Type: application/json
 
 {
-    "name": "test",
-    "date": "2022-01-20"
+    "mood": 5,
+    "notes": "lorem ipsum",
+    "timestamp": 1642948330679
 }
 
 ###
 
-DELETE http://localhost:4000/entries/4
+DELETE http://localhost:4000/entries/2
 
 ###
 
-PUT http://localhost:4000/entries/6
+POST http://localhost:4000/entries/update
+Content-Type: application/json
+
+{
+    "mood": 3,
+    "notes": "new notes",
+    "timestamp": 1642948330679,
+    "id": 5
+}
+
+// "id": 3
 
 ###
 

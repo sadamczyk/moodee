@@ -10,7 +10,7 @@ router.get('/list', entriesController.listEntries)
 
 router.post('/create', entriesController.createEntries)
 
-router.put('/:id', entriesController.updateEntries)
+router.post('/update', entriesController.updateEntries)
 
 router.delete('/:id', entriesController.deleteEntries)
 
