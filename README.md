@@ -7,7 +7,10 @@ npm: `8.1.2`
 
 ## Application
 ### Run the webserver for the frontend
-Run `node index.js`
+`node index.js`
+
+### Run the watcher to build the frontend app
+`npx babel --watch .\src\ --out-dir .\build\ --presets react-app/prod`
 
 ### Open the webpage
 http://localhost:3000

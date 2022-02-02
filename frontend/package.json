@@ -1,12 +1,10 @@
 {
-  "name": "moodee-backend",
+  "name": "moodee-frontend",
   "version": "0.1.0",
-  "description": "Mood / activity tracker web app - Backend",
-  "main": "server.js",
-  "type": "module",
+  "description": "Mood / activity tracker web app - Frontend",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -19,6 +17,7 @@
   },
   "homepage": "https://github.com/sadamczyk/moodee#readme",
   "dependencies": {
-    "express": "^4.17.2"
+    "babel-cli": "^6.26.0",
+    "babel-preset-react-app": "^3.1.2"
   }
 }

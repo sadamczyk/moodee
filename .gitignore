@@ -1,3 +1,6 @@
+# Ignore built code
+frontend/build/
+
 # Logs
 logs
 *.log
