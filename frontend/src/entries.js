@@ -1,6 +1,7 @@
 'use strict'
 import ReactDOM from 'react-dom'
 import React from 'react'
+import Entry from './entry'
 
 class Entries extends React.Component {
   constructor(props) {
@@ -11,9 +12,7 @@ class Entries extends React.Component {
   render() {
     return (
       <div id="entries">
-        <div class="entry">Entry #1</div>
-        <div class="entry">Entry #2</div>
-        <div class="entry">Entry #3</div>
+        <Entry></Entry>
       </div>
     )
   }

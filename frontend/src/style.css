@@ -1,0 +1,7 @@
+.entry {
+    display: flex;
+}
+
+.entry-controls {
+    width: 30px;
+}
