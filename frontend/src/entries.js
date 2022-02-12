@@ -1,4 +1,6 @@
 'use strict'
+import ReactDOM from 'react-dom'
+import React from 'react'
 
 class Entries extends React.Component {
   constructor(props) {
