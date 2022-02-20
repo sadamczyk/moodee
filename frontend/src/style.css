@@ -1,7 +1,29 @@
+body {
+    font-family: sans-serif;
+}
+
 .entry {
     display: flex;
+    width: fit-content;
+    background-color: rgb(245, 245, 245);
+}
+
+.entry-data {
+    width: 400px;
+    margin: 10px;
+}
+
+.entry-data > div {
+    margin-bottom: 10px;
 }
 
 .entry-controls {
-    width: 30px;
+    width: 40px;
+    height: 70px;
+    margin: 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
 }
