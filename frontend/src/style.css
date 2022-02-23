@@ -8,12 +8,15 @@ body {
     background-color: rgb(245, 245, 245);
 }
 
-.entry-data {
+.entry-view {
     width: 400px;
     margin: 10px;
+    
+    display: flex;
+    flex-direction: column;
 }
 
-.entry-data > div {
+.entry-view > * {
     margin-bottom: 10px;
 }
 
@@ -26,4 +29,12 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
+}
+
+.entry-controls > span {
+    cursor: pointer;
+}
+
+.hide {
+    display: none;
 }
