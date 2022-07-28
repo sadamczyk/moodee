@@ -5,14 +5,26 @@ import Entry from './entry'
 
 class Entries extends React.Component {
   constructor(props) {
-    super(props);
-    this.state = {}; // TODO Remove if not needed
+    super(props)
+    this.state = {
+      entries: [1, 3, 5]
+    }
+  }
+
+  removeEntry(id) {
+    return () => {
+      this.setState({entries: this.state.entries.filter((value) => {
+        return value !== id
+      })})
+    }
   }
 
   render() {
     return (
       <div id="entries">
-        <Entry></Entry>
+        {this.state.entries.map((id) => {
+          return <Entry key={id} id={id} removeEntry={this.removeEntry(id)} />
+        })}
       </div>
     )
   }

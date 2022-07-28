@@ -3,8 +3,7 @@ import React from 'react'
 
 export default class Entry extends React.Component {
   constructor(props) {
-    super(props);
-    this.state = {}; // TODO Remove if not needed
+    super(props)
   }
 
   toggleHideChildren(el) {
@@ -22,6 +21,7 @@ export default class Entry extends React.Component {
     return (
       <div className="entry toggle-hide-children">
         <div className="entry-view">
+            <div className="entry-id">ID: {this.props.id}</div>
             <div className="entry-datetime">2022-02-12 09:38</div>
             <div className="entry-mood">3: OK</div>
             <div className="entry-notes">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و </div>
@@ -40,7 +40,7 @@ export default class Entry extends React.Component {
         </div>
         <div className="entry-controls">
             <span className="entry-edit" onClick={this.toggleHideChildren}>✏️</span>
-            <span className="entry-delete">🗑️</span>
+            <span className="entry-delete" onClick={this.props.removeEntry}>🗑️</span>
         </div>
         <div className="entry-controls hide">
             <span className="entry-save">💾</span>
