@@ -22,9 +22,9 @@ export default class Entry extends React.Component {
       <div className="entry toggle-hide-children">
         <div className="entry-view">
             <div className="entry-id">ID: {this.props.id}</div>
-            <div className="entry-datetime">2022-02-12 09:38</div>
-            <div className="entry-mood">3: OK</div>
-            <div className="entry-notes">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و </div>
+            <div className="entry-datetime">Datetime: {this.props.datetime}</div>
+            <div className="entry-mood">Mood: {this.props.mood}</div>
+            <div className="entry-note">note: {this.props.note}</div>
         </div>
         <div className="entry-view entry-form hide">
           <input type="datetime-local"></input>

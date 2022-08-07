@@ -1,5 +1,21 @@
-const entries = []
 let id = 1
+// const entries = []
+const entries = [{
+    id: id++,
+    datetime: new Date().toISOString(),
+    mood: 3,
+    note: 'Lorem ipsum dolor sit amet',
+}, {
+    id: id++,
+    datetime: new Date().toISOString(),
+    mood: 2,
+    note: 'Lorem ipsum 2: electric boogaloo',
+}, {
+    id: id++,
+    datetime: new Date().toISOString(),
+    mood: 5,
+    note: 'Lorem ipsum 3: Revolutions',
+}]
 
 export const listEntries = (req, res) => {
     res.type('json')

@@ -6,11 +6,11 @@ const router = express.Router()
 import * as entriesController from '../controllers/entries.js'
 
 // Entries Routes
-router.get('/list', entriesController.listEntries)
+router.get('/', entriesController.listEntries)
 
-router.post('/create', entriesController.createEntries)
+router.post('/', entriesController.createEntries)
 
-router.post('/update', entriesController.updateEntries)
+router.put('/:id', entriesController.updateEntries)
 
 router.delete('/:id', entriesController.deleteEntries)
 
