@@ -47,7 +47,7 @@ export default class Entry extends React.Component {
   }
 
   saveEntry(el) {
-      const entry = this.state
+      const entry = structuredClone(this.state)
       entry.datetime = this.convertLocalDateToServerDate(entry.datetime)
       let url = 'http://localhost:4000/entries/'
       let method = 'POST'
