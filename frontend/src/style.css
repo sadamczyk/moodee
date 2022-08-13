@@ -2,6 +2,10 @@ body {
     font-family: sans-serif;
 }
 
+button {
+    margin-bottom: 10px;
+}
+
 .entry {
     display: flex;
     width: fit-content;
@@ -12,7 +16,7 @@ body {
 .entry-view {
     width: 400px;
     margin: 10px;
-    
+
     display: flex;
     flex-direction: column;
 }

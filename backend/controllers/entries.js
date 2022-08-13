@@ -25,8 +25,8 @@ export const listEntries = (req, res) => {
 export const createEntries = (req, res) => {
     req.body.id = id
     entries.push(req.body)
+    res.status(201).send({id: id})
     id++
-    res.sendStatus(200)
 }
 
 export const updateEntries = (req, res) => {

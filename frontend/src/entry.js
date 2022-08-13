@@ -10,9 +10,9 @@ export default class Entry extends React.Component {
   }
 
   /**
-   * Dates on server are always UTC, but have to be converted 
+   * Dates on server are always UTC, but have to be converted
    * to the correct local timezone for the client.
-   * 
+   *
    * Also convert it to the right format that the <input> datetime-local
    * field expects, @see https://stackoverflow.com/a/66558369.
    */
@@ -27,14 +27,17 @@ export default class Entry extends React.Component {
   }
 
   toggleHideChildren(el) {
-    let siblings = el.target.parentElement.parentElement.children
-    for (let sibling of siblings) {
+    for (let sibling of el.children) {
       if (sibling.classList.contains('hide')) {
         sibling.classList.remove('hide')
       } else {
         sibling.classList.add('hide')
       }
     }
+  }
+
+  toggleControls(el) {
+    this.toggleHideChildren(el.target.parentElement.parentElement)
   }
 
   handleChange(attr) {
@@ -46,27 +49,53 @@ export default class Entry extends React.Component {
   saveEntry(el) {
       const entry = this.state
       entry.datetime = this.convertLocalDateToServerDate(entry.datetime)
+      let url = 'http://localhost:4000/entries/'
+      let method = 'POST'
 
-      fetch('http://localhost:4000/entries/' + entry.id, { 
-        method: 'PUT',
+      if (entry.id) { // Update existing entry
+        url = 'http://localhost:4000/entries/' + entry.id
+        method = 'PUT'
+      }
+
+      fetch(url, {
+        method: method,
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(entry)
       })
-        .then(res => {
-          if (res.status === 200) {
-            this.toggleHideChildren(el)
-          } else {
-            console.log(res)
+        .then(async res => {
+          switch (res.status) {
+            case 201:
+              const body = await res.json()
+              this.setState({
+                id: body.id
+              })
+
+            case 200:
+              this.toggleControls(el)
+              break
+
+            default:
+              console.log(res)
           }
+
+          this.props.loadEntries()
         })
+  }
+
+  componentDidMount() {
+    // Immediately toggle controls for new entry
+    if (!this.state.id) {
+      const entryDOM = document.getElementById('entry-' + this.state.id)
+      this.toggleHideChildren(entryDOM)
+    }
   }
 
   render() {
     return (
-      <div className="entry toggle-hide-children">
+      <div id={'entry-' + this.state.id} className="entry toggle-hide-children">
         <div className="entry-view">
             <div className="entry-id">ID: {this.state.id ?? 'NULL'}</div>
             <div className="entry-datetime">Datetime: {this.state.datetime}</div>
@@ -86,12 +115,12 @@ export default class Entry extends React.Component {
           <input type="textarea" onChange={this.handleChange('note')} value={this.state.note}></input>
         </div>
         <div className="entry-controls">
-            <span className="entry-edit" onClick={this.toggleHideChildren}>✏️</span>
+            <span className="entry-edit" onClick={this.toggleControls.bind(this)}>✏️</span>
             <span className="entry-delete" onClick={this.props.removeEntry}>🗑️</span>
         </div>
         <div className="entry-controls hide">
             <span className="entry-save" onClick={this.saveEntry.bind(this)}>💾</span>
-            <span className="entry-cancel" onClick={this.toggleHideChildren}>❌</span>
+            <span className="entry-cancel" onClick={!this.state.id ? this.props.removeEntry : this.toggleControls.bind(this)}>❌</span>
         </div>
       </div>
     )
