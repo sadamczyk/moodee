@@ -8,7 +8,7 @@ class Entries extends React.Component {
     super(props)
     this.state = {
       entries: null,
-      isButtonDisabled: false
+      activeControlEntryId: null
     }
 
     this.loadEntries()
@@ -18,7 +18,7 @@ class Entries extends React.Component {
     fetch('http://localhost:4000/entries/')
       .then(res => res.json())
       .then(res => this.setState({entries: res}))
-      .then(res => this.setState({isButtonDisabled: false}))
+      .then(res => this.setState({activeControlEntryId: null}))
   }
 
   addEntry() {
@@ -30,7 +30,7 @@ class Entries extends React.Component {
       note: ''
     })
     this.setState({entries: entries})
-    this.setState({isButtonDisabled: true}) // TODO En-/Disable all button/entry controls (except the new one) together
+    this.setState({activeControlEntryId: 0})
   }
 
   removeEntry(id) {
@@ -48,10 +48,19 @@ class Entries extends React.Component {
     }
   }
 
+  /**
+   * Disables all controls except for given entry id.
+   *
+   * @param {int} activeControlEntryId
+   */
+  disableControls(activeControlEntryId) {
+    this.setState({ activeControlEntryId: activeControlEntryId })
+  }
+
   render() {
     return (
       <>
-      <button id="add-entry" disabled={this.state.isButtonDisabled} onClick={this.addEntry.bind(this)}>Add new entry</button>
+      <button id="add-entry" disabled={this.state.activeControlEntryId !== null} onClick={this.addEntry.bind(this)}>Add new entry</button>
       <div id="entries">
         {!this.state.entries ? 'Loading...' : this.state.entries.map((entry) => {
           return <Entry
@@ -62,6 +71,8 @@ class Entries extends React.Component {
             note={entry.note}
             loadEntries={this.loadEntries.bind(this)}
             removeEntry={this.removeEntry(entry.id)}
+            areControlsDisabled={this.state.activeControlEntryId !== null && this.state.activeControlEntryId !== entry.id}
+            disableControls={this.disableControls.bind(this)}
           />
         })}
       </div>
