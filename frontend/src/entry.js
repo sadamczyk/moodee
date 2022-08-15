@@ -93,21 +93,21 @@ export default class Entry extends React.Component {
     }
   }
 
-  onEdit(el) {
+  onEdit = (el) => {
     this.toggleControls(el)
     this.props.disableControls(this.state.id)
   }
 
-  onDelete(el) {
+  onDelete = (el) => {
     this.props.removeEntry()
   }
 
-  onSave(el) {
+  onSave = (el) => {
     this.saveEntry(el)
     this.props.disableControls(null)
   }
 
-  onCancel(el) {
+  onCancel = (el) => {
     if (!this.state.id) {
       this.props.removeEntry()
     } else {
@@ -139,12 +139,12 @@ export default class Entry extends React.Component {
           <input type="textarea" onChange={this.handleChange('note')} value={this.state.note}></input>
         </div>
         <div className="entry-controls">
-            <button disabled={this.props.areControlsDisabled} className="entry-edit" onClick={this.onEdit.bind(this)}>✏️</button>
-            <button disabled={this.props.areControlsDisabled} className="entry-delete" onClick={this.onDelete.bind(this)}>🗑️</button>
+            <button disabled={this.props.areControlsDisabled} className="entry-edit" onClick={this.onEdit}>✏️</button>
+            <button disabled={this.props.areControlsDisabled} className="entry-delete" onClick={this.onDelete}>🗑️</button>
         </div>
         <div className="entry-controls hide">
-            <button disabled={this.props.areControlsDisabled} className="entry-save" onClick={this.onSave.bind(this)}>💾</button>
-            <button disabled={this.props.areControlsDisabled} className="entry-cancel" onClick={this.onCancel.bind(this)}>❌</button>
+            <button disabled={this.props.areControlsDisabled} className="entry-save" onClick={this.onSave}>💾</button>
+            <button disabled={this.props.areControlsDisabled} className="entry-cancel" onClick={this.onCancel}>❌</button>
         </div>
       </div>
     )
