@@ -24,7 +24,7 @@ class Entries extends React.Component {
   addEntry = () => {
     const entries = this.state.entries
     entries.push({
-      id: 0,
+      _id: 0,
       datetime: new Date(),
       mood: 3,
       note: ''
@@ -34,17 +34,27 @@ class Entries extends React.Component {
   }
 
   removeEntry(id) {
-    return () => {
-      fetch('http://localhost:4000/entries/' + id, { method: 'DELETE' })
-        .then(res => {
-          if (res.status === 200) {
-            this.setState({entries: this.state.entries.filter((entry) => {
-              return entry.id !== id
-            })})
-          } else {
-            console.log(res)
-          }
+    const removeEntryFromState = () => {
+      this.setState({
+        entries: this.state.entries.filter((entry) => {
+          return entry._id !== id
         })
+      })
+    }
+
+    if (!id) {
+      return removeEntryFromState
+    } else {
+      return () => {
+        fetch('http://localhost:4000/entries/' + id, { method: 'DELETE' })
+          .then(res => {
+            if (res.status === 200) {
+              removeEntryFromState()
+            } else {
+              console.log(res)
+            }
+          })
+      }
     }
   }
 
@@ -64,14 +74,14 @@ class Entries extends React.Component {
       <div id="entries">
         {!this.state.entries ? 'Loading...' : this.state.entries.map((entry) => {
           return <Entry
-            key={entry.id}
-            id={entry.id}
+            key={entry._id}
+            id={entry._id}
             datetime={entry.datetime}
             mood={entry.mood}
             note={entry.note}
             loadEntries={this.loadEntries}
-            removeEntry={this.removeEntry(entry.id)}
-            areControlsDisabled={this.state.activeControlEntryId !== null && this.state.activeControlEntryId !== entry.id}
+            removeEntry={this.removeEntry(entry._id)}
+            areControlsDisabled={this.state.activeControlEntryId !== null && this.state.activeControlEntryId !== entry._id}
             disableControls={this.disableControls}
           />
         })}

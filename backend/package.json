@@ -19,7 +19,9 @@
   },
   "homepage": "https://github.com/sadamczyk/moodee#readme",
   "dependencies": {
-    "express": "^4.17.2"
+    "dotenv": "^16.0.1",
+    "express": "^4.17.2",
+    "mongoose": "^6.5.2"
   },
   "engines": {
     "node": "~18.7.0",

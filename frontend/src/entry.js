@@ -3,7 +3,7 @@ import React from 'react'
 
 export default class Entry extends React.Component {
   state = {
-    id: this.props.id,
+    _id: this.props.id,
     datetime: this.convertServerDateToLocalDate(this.props.datetime),
     mood: this.props.mood,
     note: this.props.note,
@@ -52,8 +52,8 @@ export default class Entry extends React.Component {
       let url = 'http://localhost:4000/entries/'
       let method = 'POST'
 
-      if (entry.id) { // Update existing entry
-        url = 'http://localhost:4000/entries/' + entry.id
+      if (entry._id) { // Update existing entry
+        url = 'http://localhost:4000/entries/' + entry._id
         method = 'PUT'
       }
 
@@ -67,13 +67,13 @@ export default class Entry extends React.Component {
       })
         .then(async res => {
           switch (res.status) {
-            case 201:
+            case 201: // Created succesfully
               const body = await res.json()
               this.setState({
-                id: body.id
+                _id: body._id
               })
 
-            case 200:
+            case 200: // Updated succesfully
               this.toggleControls(el)
               break
 
@@ -87,15 +87,15 @@ export default class Entry extends React.Component {
 
   componentDidMount() {
     // Immediately toggle controls for new entry
-    if (!this.state.id) {
-      const entryDOM = document.getElementById('entry-' + this.state.id)
+    if (!this.state._id) {
+      const entryDOM = document.getElementById('entry-' + this.state._id)
       this.toggleHideChildren(entryDOM)
     }
   }
 
   onEdit = (el) => {
     this.toggleControls(el)
-    this.props.disableControls(this.state.id)
+    this.props.disableControls(this.state._id)
   }
 
   onDelete = (el) => {
@@ -108,7 +108,7 @@ export default class Entry extends React.Component {
   }
 
   onCancel = (el) => {
-    if (!this.state.id) {
+    if (!this.state._id) {
       this.props.removeEntry()
     } else {
       this.toggleControls(el)
@@ -119,9 +119,9 @@ export default class Entry extends React.Component {
 
   render() {
     return (
-      <div id={'entry-' + this.state.id} className="entry toggle-hide-children">
+      <div id={'entry-' + this.state._id} className="entry toggle-hide-children">
         <div className="entry-view">
-            <div className="entry-id">ID: {this.state.id ?? 'NULL'}</div>
+            <div className="entry-id">ID: {this.state._id ?? 'NULL'}</div>
             <div className="entry-datetime">Datetime: {this.state.datetime}</div>
             <div className="entry-mood">Mood: {this.state.mood}</div>
             <div className="entry-note">note: {this.state.note}</div>
