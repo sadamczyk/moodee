@@ -1,7 +1,7 @@
 import Entry from '../models/entry.js'
 
 export const listEntries = (req, res) => {
-    Entry.find().exec(function(err, entries) {
+    Entry.find().sort({datetime: -1}).exec(function(err, entries) {
         const entriesJSON = entries.map(function(entry) {
             return entry.toJSON()
         })
